@@ -1,0 +1,44 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+{#    <link rel="stylesheet" type="text/css" href="{% static 'polls/style.css' %}" />#}
+    <title>What a great title</title>
+</head>
+<body>
+
+{#<div class="content">#}
+{#    {% if user_tasks %}#}
+{#        <ul>#}
+{#        {% for task in user_tasks %}#}
+{#            <li><a href="{% url 'task_manager:detail' task.id %}">{{ task.title }}</a></li>#}
+{#        {% endfor %}#}
+{#        </ul>#}
+{#    {% else %}#}
+{#        <p>No tasks to be done.</p>#}
+{#    {% endif %}#}
+{##}
+{#</div>#}
+
+<div class="content">
+    {% if user_tasks %}
+        <p>{{ user_tasks }}</p>
+        <br>
+        {% for k, tasks in user_tasks.items %}
+            <p>{{ tasks }}</p>
+            {% for task in tasks %}
+                <p>{{ task.title }}</p>
+            {% endfor %}
+        {% endfor %}
+    {% else %}
+        <p>No tasks to be done.</p>
+    {% endif %}
+
+</div>
+
+
+<footer></footer>
+</body>
+</html>
