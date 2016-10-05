@@ -1,7 +1,9 @@
 import datetime
 
+from collections import defaultdict
 from django.contrib.auth.models import User
 from django.db import models
+from django.db.models import Count
 
 
 # todo: reminder can't be higher than due_to_date
@@ -29,13 +31,21 @@ class Task(models.Model):
 
     @classmethod
     def from_today_grouped_by(cls, owner, field):
-        today = datetime.date.today()
-        return cls.objects.raw(
-            """Select id, title, due_to_date, description, is_done
-               From task_manager_task
-               WHERE due_to_date >= '{0}' and owner_id={1}
-               GROUP BY {2}
-               ORDER BY due_to_date""".format(today, owner, field))
+        tasks_query = Task.get_all_user_tasks_from_today(owner).values().order_by(field)
+        tasks_dict = defaultdict(list)
+        dict_list = []
+
+        for tasks_dictionary in tasks_query:
+            dict_list.append(tasks_dictionary)
+        for task_dict in dict_list:
+            tasks_dict[task_dict[field]].append(task_dict)
+
+        return dict(tasks_dict)
+
+    @classmethod
+    def count_by_date(cls, owner):
+        user_tasks = cls.get_all_user_tasks_from_today(owner)
+        return user_tasks.values('due_to_date').order_by('due_to_date').annotate(tasks_amount=Count('id'))
 
     def __str__(self):
         return self.title

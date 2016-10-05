@@ -1,10 +1,6 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
+{% extends "task_manager/base.html" %}
+
+{% block content %}
 
 <h1>{{ user_task.title }}</h1>
 
@@ -14,5 +10,4 @@
 <p>{{ user_task.attached_file }}</p>
 <p>{{ user_task.is_done }}</p>
 
-</body>
-</html>
+{% endblock body %}

@@ -1,0 +1,20 @@
+{% block header %}
+    <header class="header">
+		<input type="text" class="search header__search" placeholder="поиск">
+		<div class="header__logo"></div>
+		<div class="header__button_panel">
+			<button class="button header__button header__create-task-button">
+				<i class="fa fa-calendar-plus-o"></i>
+			</button>
+			<button class="button header__button">
+				<i class="fa fa-cog button__icon"></i>
+				{{ user.username|capfirst }}
+			</button>
+			<button class="button header__button">
+				<i class="fa fa-info-circle"></i>
+			</button>
+		</div>
+	</header>
+{% endblock %}
+
+

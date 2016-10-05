@@ -1,0 +1,25 @@
+{% load static %}
+{% load i18n %}
+
+{% get_current_language as LANGUAGE_CODE %}
+
+<!DOCTYPE html>
+<html lang="{{ LANGUAGE_CODE }}">
+<head>
+	<meta charset="UTF-8">
+	<title>{% block title %}{% endblock %}</title>
+	<link rel="stylesheet" href="{% static "task_manager/css/importer.css" %}">
+	<link href="https://fonts.googleapis.com/css?family=Open+Sans+Condensed:300" rel="stylesheet">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css">
+</head>
+<body class="wrapper">
+
+{% block header %}
+    {% include "task_manager/base_header.html" %}
+{% endblock header %}
+
+{% block content %}{% endblock %}
+
+	<script src="{% static "task_manager/js/main.js" %}"></script>
+</body>
+</html>

@@ -1,44 +1,25 @@
-{% load static %}
+{% extends "task_manager/base.html" %}
+{% load l10n %}
+{% load i18n %}
 
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-{#    <link rel="stylesheet" type="text/css" href="{% static 'polls/style.css' %}" />#}
-    <title>What a great title</title>
-</head>
-<body>
+{% block title %}{% trans "Task Manager" %}{% endblock %}
 
-{#<div class="content">#}
-{#    {% if user_tasks %}#}
-{#        <ul>#}
-{#        {% for task in user_tasks %}#}
-{#            <li><a href="{% url 'task_manager:detail' task.id %}">{{ task.title }}</a></li>#}
-{#        {% endfor %}#}
-{#        </ul>#}
-{#    {% else %}#}
-{#        <p>No tasks to be done.</p>#}
-{#    {% endif %}#}
-{##}
-{#</div>#}
+{% block content %}
 
-<div class="content">
-    {% if user_tasks %}
-        <p>{{ user_tasks }}</p>
-        <br>
-        {% for k, tasks in user_tasks.items %}
-            <p>{{ tasks }}</p>
-            {% for task in tasks %}
-                <p>{{ task.title }}</p>
-            {% endfor %}
+	<main class="day-list">
+        {% for task_by_day in tasks_by_days %}
+            <article class="day-card" calendar-date="{{ task_by_day.due_to_date|date:"Y-m-d" }}">
+                <div class="day-card__image"></div>
+                <div class="day-card__content">
+                        <span class="day-card__date">{{ task_by_day.due_to_date|date:"j" }} {{ task_by_day.due_to_date|date:"M" }}</span>
+                        <span class="day-card__day-name">{{ task_by_day.due_to_date|date:"l" }}</span>
+                        <span class="day-card__task-count">{% trans "Число задач:" %}{{ task_by_day.tasks_amount }}</span>
+                </div>
+            </article>
+
         {% endfor %}
-    {% else %}
-        <p>No tasks to be done.</p>
-    {% endif %}
-
-</div>
 
 
-<footer></footer>
-</body>
-</html>
+
+	</main>
+{% endblock content %}

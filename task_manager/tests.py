@@ -86,3 +86,25 @@ class TasksView(TestCase):
         self.assertQuerysetEqual(
             bob_response.context['user_tasks'], ["<Task: Bob today task>"]
         )
+
+    def test_count_by_date(self):
+        """
+        Task.count_by_date method test.
+        """
+        bob = create_user('Bob')
+
+        create_task(owner=bob, title='Bob today first task', days=0, remind_days=1)
+        create_task(owner=bob, title='Bob today second task', days=0, remind_days=1)
+        create_task(owner=bob, title='Bob tomorrow first task', days=1, remind_days=1)
+        create_task(owner=bob, title='Bob tomorrow second task', days=1, remind_days=1)
+        create_task(owner=bob, title='Bob future task', days=4, remind_days=1)
+
+        print(Task.count_by_date(bob))
+
+        self.assertQuerysetEqual(Task.count_by_date(bob),
+                                 [
+                                     "{'tasks': 2, 'due_to_date': datetime.date(2016, 10, 4)}",
+                                     "{'tasks': 2, 'due_to_date': datetime.date(2016, 10, 5)}",
+                                     "{'tasks': 1, 'due_to_date': datetime.date(2016, 10, 8)}",
+                                 ]
+                                 )
