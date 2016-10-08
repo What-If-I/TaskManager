@@ -8,13 +8,13 @@ from django.db.models import Count
 
 # todo: reminder can't be higher than due_to_date
 class Task(models.Model):
-    owner = models.ForeignKey(User, on_delete=models.CASCADE)
+    owner = models.ForeignKey(User, on_delete=models.CASCADE, verbose_name='Owner')
     title = models.CharField(max_length=100, verbose_name='Task')
     due_to_date = models.DateField(default=datetime.date.today(), verbose_name='Due to')
     description = models.TextField('Description')
     reminder = models.DateTimeField('Reminder', blank=True, null=True)
-    attached_file = models.FileField(upload_to='uploads/', blank=True, null=True)
-    is_done = models.BooleanField(default=False)
+    attached_file = models.FileField(upload_to='uploads/', blank=True, null=True, verbose_name='Document')
+    is_done = models.BooleanField(default=False, verbose_name='Done')
 
     def not_from_past(self):
         today = datetime.date.today()
