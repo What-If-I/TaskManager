@@ -4,6 +4,7 @@ from collections import defaultdict
 from django.contrib.auth.models import User
 from django.db import models
 from django.db.models import Count
+from django import forms
 
 
 # todo: reminder can't be higher than due_to_date
@@ -43,9 +44,17 @@ class Task(models.Model):
         return dict(tasks_dict)
 
     @classmethod
-    def count_by_date(cls, owner):
+    def user_tasks_count_by_date(cls, owner):
         user_tasks = cls.get_all_user_tasks_from_today(owner)
         return user_tasks.values('due_to_date').order_by('due_to_date').annotate(tasks_amount=Count('id'))
 
     def __str__(self):
         return self.title
+
+
+class TaskForm(forms.Form):
+    title = forms.CharField()
+    description = forms.CharField(widget=forms.Textarea)
+    due_to_date = forms.DateField()
+    reminder = forms.DateTimeField(required=False)
+    attached_file = forms.FileField(required=False)

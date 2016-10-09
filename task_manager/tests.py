@@ -99,9 +99,9 @@ class TasksView(TestCase):
         create_task(owner=bob, title='Bob tomorrow second task', days=1, remind_days=1)
         create_task(owner=bob, title='Bob future task', days=4, remind_days=1)
 
-        print(Task.count_by_date(bob))
+        print(Task.user_tasks_count_by_date(bob))
 
-        self.assertQuerysetEqual(Task.count_by_date(bob),
+        self.assertQuerysetEqual(Task.user_tasks_count_by_date(bob),
                                  [
                                      "{'tasks': 2, 'due_to_date': datetime.date(2016, 10, 4)}",
                                      "{'tasks': 2, 'due_to_date': datetime.date(2016, 10, 5)}",

@@ -18,6 +18,30 @@
 
         {% endfor %}
 
+		<section class="slider {% if open_task_form is True %}slider_active{% endif %} ">
+			<form class="task-creation-form" action="{% url 'task_manager:index' %}" method="post">
+                {% csrf_token %}
+				<h2 class="task-creation-form__header">Создать Задачу</h2>
+				<input type="text"
+				       name="title"
+				       class="form-control task-creation-form__form-control"
+				       placeholder="Заголовок"
+                    value="{{ task_form.cleaned_data.title }}">
+				<textarea type="text"
+				          name="description"
+				          class="form-control task-creation-form__form-control task-creation-form__text-area"
+				          placeholder="Описание">{{ task_form.cleaned_data.description }}</textarea>
+				<input type="date"
+				       name="complete-date"
+				       class="form-control task-creation-form__form-control task-creation-form__date-picker"
+                value="{{ task_form.cleaned_data.due_to_date }}">
+				<input type="datetime-local"
+				       name="notification-time"
+				       class="form-control task-creation-form__form-control task-creation-form__date-picker"
+                        value="{{ task_form_reminder }}">
+				<button class="button task-creation-form__button">Сохранить</button>
+			</form>
+		</section>
 
 
 	</main>
