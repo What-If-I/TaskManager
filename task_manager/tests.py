@@ -100,30 +100,23 @@ class TasksView(TestCase):
         """
         user_charlie = create_user('charlie')
 
-        create_task(owner=self.user_bob, title='Bob today task', days=1, remind_days=1)
         create_task(owner=user_charlie, title='Charlie\'s task', days=1, remind_days=1)
 
         bob_response = self.client.get(reverse('task_manager:index'))
-        print(bob_response)
+        print(bob_response.context)
 
         self.assertQuerysetEqual(
-            bob_response.context['tasks_by_days'],
-            {'tasks_amount': 1, 'due_to_date': datetime.date(2016, 10, 19)},
-            transform=dict,
-        )
+            bob_response.context['object_list'], {}, transform=dict,)
 
     def test_count_by_date(self):
         """
         Task.count_by_date method test.
         """
-
         create_task(owner=self.user_bob, title='Bob today first task', days=0, remind_days=1)
         create_task(owner=self.user_bob, title='Bob today second task', days=0, remind_days=1)
         create_task(owner=self.user_bob, title='Bob tomorrow first task', days=1, remind_days=1)
         create_task(owner=self.user_bob, title='Bob tomorrow second task', days=1, remind_days=1)
         create_task(owner=self.user_bob, title='Bob future task', days=4, remind_days=1)
-
-        print(Task.user_tasks_count_by_date(self.user_bob))
 
         self.assertQuerysetEqual(Task.user_tasks_count_by_date(self.user_bob),
                                  [
