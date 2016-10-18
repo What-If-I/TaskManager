@@ -1,7 +1,7 @@
 {% block header %}
-    <header class="header">
+    <header class="header" xmlns="http://www.w3.org/1999/html">
 		<input type="text" class="search header__search" placeholder="поиск">
-		<div class="header__logo"></div>
+        <a class="header__logo" href="/"></a>
 		<div class="header__button_panel">
 			<button class="button header__button header__create-task-button">
 				<i class="fa fa-calendar-plus-o"></i>
@@ -11,10 +11,8 @@
 				{{ user.username|capfirst }}
 			</button>
 			<button class="button header__button">
-				<i class="fa fa-info-circle"></i>
+                <a href="/logout/"><i class="fa fa-sign-out"></i></a>
 			</button>
 		</div>
 	</header>
 {% endblock %}
-
-

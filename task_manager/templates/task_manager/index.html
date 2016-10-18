@@ -1,5 +1,6 @@
 {% extends "task_manager/base.html" %}
 {% load i18n %}
+{% load l10n %}
 
 {% block title %}{% trans "Task Manager" %}{% endblock %}
 
@@ -7,14 +8,15 @@
 
 	<main class="day-list">
         {% for task_by_day in tasks_by_days %}
-            <article class="day-card" calendar-date="{{ task_by_day.due_to_date|date:"Y-m-d" }}">
+            <a class="day-card" calendar-date="{{ task_by_day.due_to_date|date:"Y-m-d" }}"
+               href="{% language 'en' %}{{ task_by_day.due_to_date|date:"Y/b/d" }}{% endlanguage %}">
                 <div class="day-card__image"></div>
                 <div class="day-card__content">
                         <span class="day-card__date">{{ task_by_day.due_to_date|date:"j" }} {{ task_by_day.due_to_date|date:"M" }}</span>
                         <span class="day-card__day-name">{{ task_by_day.due_to_date|date:"l" }}</span>
                         <span class="day-card__task-count">{% trans "Число задач:" %}{{ task_by_day.tasks_amount }}</span>
                 </div>
-            </article>
+            </a>
 
         {% endfor %}
 

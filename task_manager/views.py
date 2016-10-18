@@ -16,6 +16,7 @@ class IndexView(LoginRequiredMixin, generic.ListView):
         return Task.user_tasks_count_by_date(owner=self.request.user.id)
 
     def post(self, request, *args, **kwargs):
+        """Submit new task"""
         reminder = self.request.POST['notification-time']
 
         task_form = TaskForm(
@@ -23,7 +24,7 @@ class IndexView(LoginRequiredMixin, generic.ListView):
                 'title': self.request.POST['title'],
                 'description': self.request.POST['description'],
                 'due_to_date': self.request.POST['complete-date'],
-                'reminder': reminder.replace("T", " "),  # remove 'T' before time
+                'reminder': reminder.replace("T", " "),  # remove 'T' between date and time
             }
         )
         if task_form.is_valid():
@@ -40,11 +41,25 @@ class IndexView(LoginRequiredMixin, generic.ListView):
                           })
 
 
-class DetailView(LoginRequiredMixin, generic.DetailView):
+class TaskView(LoginRequiredMixin, generic.DetailView):
     login_url = '/login/'
     model = Task
     context_object_name = 'user_task'
     template_name = 'task_manager/detail.html'
+    allow_empty = False
 
     def get_queryset(self):
         return Task.get_all_user_tasks_from_today(self.request.user.id)
+
+
+class DailyTaskView(LoginRequiredMixin, generic.DayArchiveView):
+    login_url = '/login/'
+    template_name = 'task_manager/by_day.html'
+    context_object_name = 'day_tasks'
+    date_field = "due_to_date"
+    allow_future = True
+    queryset = Task.objects.all()
+    allow_empty = True
+
+    def get_queryset(self, *args, **kwargs):
+        return self.queryset.filter(owner=self.request.user.id)

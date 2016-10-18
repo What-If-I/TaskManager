@@ -1,0 +1,63 @@
+{% extends "task_manager/base.html" %}
+
+{% block content %}
+
+<h1>{{ day_tasks }}</h1>
+
+	<main class="tasks-container">
+        <div class="task-list">
+            {% for task in day_tasks %}
+                <article class="task" task-id="{{ task.id }}"
+                         title="{{ task.title }}"
+                         description="{{ task.description }}"
+                         complete-date="{{ task.due_to_date }}"
+                         notification-time="{{ task.reminder }}">
+                    <i class="fa fa-check task__icon"></i>
+                    <span class="task-title">{{ task.title }}</span>
+                </article>
+            {% endfor %}
+        </div>
+
+		<div class="edition-form-container">
+			<form class="task-creation-form task-creation-form_mode_edit" name="editionForm">
+				<input type="text"
+				       name="title"
+				       class="form-control task-creation-form__form-control"
+				       placeholder="Заголовок">
+					<textarea type="text"
+					          name="description"
+					          class="form-control task-creation-form__form-control task-creation-form__text-area"
+					          placeholder="Описание"></textarea>
+				<input type="datetime-local"
+				       name="notificationTime"
+				       class="form-control task-creation-form__form-control task-creation-form__date-picker">
+				<input type="date"
+				       name="completeDate"
+				       class="form-control task-creation-form__form-control task-creation-form__date-picker">
+				<button class="button task-creation-form__button">Сохранить</button>
+			</form>
+		</div>
+	</main>
+
+	<section class="slider">
+		<form class="task-creation-form">
+			<h2 class="task-creation-form__header">Создать Задачу</h2>
+			<input type="text"
+			       name="title"
+			       class="form-control task-creation-form__form-control"
+			       placeholder="Заголовок">
+			<textarea type="text"
+			          name="description"
+			          class="form-control task-creation-form__form-control task-creation-form__text-area"
+			          placeholder="Описание"></textarea>
+			<input type="datetime-local"
+			       name="notification-time"
+			       class="form-control task-creation-form__form-control task-creation-form__date-picker">
+			<input type="date"
+			       name="complete-date"
+			       class="form-control task-creation-form__form-control task-creation-form__date-picker">
+			<button class="button task-creation-form__button">Сохранить</button>
+		</form>
+	</section>
+
+{% endblock content %}
