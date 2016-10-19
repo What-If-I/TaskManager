@@ -1,5 +1,9 @@
 {% extends "registration/base.html" %}
 
+{% block title %}
+
+{% endblock %}
+
 {% block content %}
 
 {% if form.errors %}
@@ -19,8 +23,10 @@
 </tr>
 </table>
 
-<input type="submit" value="login" />
+<input type="submit" value="Login" />
 <input type="hidden" name="next" value="{{ next }}" />
 </form>
+
+    <a href="{% url 'register' %}"><button>Register</button></a>
 
 {% endblock %}

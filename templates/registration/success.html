@@ -1,0 +1,14 @@
+{% extends "registration/base.html" %}
+
+{% block title %}Registration Successful{% endblock %}
+
+{% block head_extra %}<meta http-equiv="refresh" content="3; url={% url 'login' %}" />{% endblock %}
+
+{% block head %}
+ Registration Completed Successfully
+{% endblock %}
+
+{% block content %}
+    Thank you for registering.
+    <a href="{% url 'login' %}">Login</a>
+{% endblock %}

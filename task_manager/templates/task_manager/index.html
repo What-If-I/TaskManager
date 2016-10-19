@@ -20,7 +20,7 @@
 
         {% endfor %}
 
-		<section class="slider {% if open_task_form is True %}slider_active{% endif %} ">
+		<section class="slider {% if open_task_form is True %}slider_active{% endif %}">
 			<form class="task-creation-form" action="{% url 'task_manager:index' %}" method="post">
                 {% csrf_token %}
 				<h2 class="task-creation-form__header">Создать Задачу</h2>

@@ -10,8 +10,8 @@
                 <article class="task" task-id="{{ task.id }}"
                          title="{{ task.title }}"
                          description="{{ task.description }}"
-                         complete-date="{{ task.due_to_date }}"
-                         notification-time="{{ task.reminder }}">
+                         complete-date="{{ task.due_to_date|date:"Y-m-d" }}"
+                         notification-time="{{ task.reminder|date:"Y-m-d\Tg:H" }}">
                     <i class="fa fa-check task__icon"></i>
                     <span class="task-title">{{ task.title }}</span>
                 </article>
@@ -20,6 +20,8 @@
 
 		<div class="edition-form-container">
 			<form class="task-creation-form task-creation-form_mode_edit" name="editionForm">
+            {% csrf_token %}
+            <input type="hidden" name="task-id" value="">
 				<input type="text"
 				       name="title"
 				       class="form-control task-creation-form__form-control"
@@ -41,6 +43,7 @@
 
 	<section class="slider">
 		<form class="task-creation-form">
+        {% csrf_token %}
 			<h2 class="task-creation-form__header">Создать Задачу</h2>
 			<input type="text"
 			       name="title"

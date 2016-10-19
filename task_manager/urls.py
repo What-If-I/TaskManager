@@ -1,6 +1,5 @@
 from django.conf.urls import url
 from . import views
-from .models import Task
 
 app_name = 'task_manager'
 

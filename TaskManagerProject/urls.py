@@ -15,9 +15,18 @@ Including another URLconf
 """
 from django.conf.urls import url, include
 from django.contrib import admin
+from .views import RegistrationView, RegistrationDoneView
+from django.contrib.auth import views
+
+register_patterns = [
+    url(r'^register/$', RegistrationView.as_view(), name='register'),
+    url(r'^register/success/$', RegistrationDoneView.as_view(), name='register-success'),
+]
+
 
 urlpatterns = [
     url(r'', include('django.contrib.auth.urls')),
+    url(r'', include(register_patterns)),
     url(r'^admin/', admin.site.urls),
     url(r'', include('task_manager.urls')),
 ]

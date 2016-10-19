@@ -12,6 +12,7 @@
 	<link href="https://fonts.googleapis.com/css?family=Open+Sans+Condensed:300" rel="stylesheet">
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css">
     <link rel="icon" type="image/s-icon" href="{% static "/task_manager/favicon.ico" %}">
+    {% block head_extra %}{% endblock %}
 </head>
 <body class="wrapper">
 
@@ -22,5 +23,6 @@
 {% block content %}{% endblock %}
 
 	<script src="{% static "task_manager/js/main.js" %}"></script>
+	<script src="{% static "task_manager/js/day-tasks.js" %}"></script>
 </body>
 </html>
