@@ -15,8 +15,7 @@ from django.utils.translation import ugettext_lazy
 import whitenoise
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
-# BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 print("Base dir:", BASE_DIR)
 
 # Quick-start development settings - unsuitable for production
@@ -72,7 +71,7 @@ ROOT_URLCONF = 'TaskManagerProject.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [os.path.join(BASE_DIR, '/templates'),
+        'DIRS': [os.path.join(BASE_DIR, 'templates/'),
                  os.path.join(BASE_DIR, 'task_manager/templates')
                  ]
         ,
