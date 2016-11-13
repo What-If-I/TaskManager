@@ -4,9 +4,10 @@ channels==0.17.3
 constantly==15.1.0
 daphne==0.15.0
 Django==1.10.3
+gunicorn==19.4.5
 incremental==16.10.1
 six==1.10.0
 Twisted==16.5.0
 txaio==2.5.2
+whitenoise==3.2.2
 zope.interface==4.3.2
-gunicorn==19.4.5
