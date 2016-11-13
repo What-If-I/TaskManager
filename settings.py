@@ -21,12 +21,14 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # See https://docs.djangoproject.com/en/1.10/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = '8frsng*urssgptx7s6k1ms%aorqbg^_fk&v=j+!sv$t^y=x4s&'
+#  ''.join(random.SystemRandom().choice(string.ascii_letters + string.digits) for _ in range(40))
+SECRET_KEY = 'KPDgUFSzmZxqKfgj11hRkbItgIKhZyZzC06u2Sf1&'
+# SECRET_KEY = os.environ['SECRET_KEY']
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -66,8 +68,8 @@ ROOT_URLCONF = 'TaskManagerProject.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [os.path.join(BASE_DIR, 'templates'),
-                 os.path.join(BASE_DIR, 'task_manager/templates')
+        'DIRS': [os.path.join(BASE_DIR, 'TaskManager/templates'),
+                 os.path.join(BASE_DIR, 'task_manager/task_manager/templates')
                  ]
         ,
         'APP_DIRS': True,
@@ -91,10 +93,14 @@ TEMPLATES = [
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        'NAME': os.path.join(BASE_DIR, 'TaskManager/db.sqlite3'),
     }
 }
 
+
+STATICFILES_DIRS = [
+    os.path.join(BASE_DIR, "/task_manager/static"),
+]
 
 # Password validation
 # https://docs.djangoproject.com/en/1.10/ref/settings/#auth-password-validators
@@ -137,5 +143,8 @@ LANGUAGES = [
 # https://docs.djangoproject.com/en/1.10/howto/static-files/
 
 STATIC_URL = '/static/'
+
+# PROJECT_DIR = os.path.dirname(os.path.abspath(__file__))
+# STATIC_ROOT = os.path.join(PROJECT_DIR, 'static')
 
 LOGIN_REDIRECT_URL = '/'  # It means home view
