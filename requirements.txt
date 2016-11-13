@@ -9,3 +9,4 @@ six==1.10.0
 Twisted==16.5.0
 txaio==2.5.2
 zope.interface==4.3.2
+gunicorn==19.4.5
