@@ -68,7 +68,7 @@ ROOT_URLCONF = 'TaskManagerProject.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [os.path.join(BASE_DIR, 'TaskManager/templates'),
+        'DIRS': [os.path.join(BASE_DIR, 'TaskManager/../templates'),
                  os.path.join(BASE_DIR, 'task_manager/task_manager/templates')
                  ]
         ,
@@ -93,7 +93,7 @@ TEMPLATES = [
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'TaskManager/db.sqlite3'),
+        'NAME': os.path.join(BASE_DIR, 'TaskManager/../db.sqlite3'),
     }
 }
 
@@ -144,7 +144,7 @@ LANGUAGES = [
 
 STATIC_URL = '/static/'
 
-# PROJECT_DIR = os.path.dirname(os.path.abspath(__file__))
-# STATIC_ROOT = os.path.join(PROJECT_DIR, 'static')
+PROJECT_DIR = os.path.dirname(os.path.abspath(__file__))
+STATIC_ROOT = os.path.join(PROJECT_DIR, 'static')
 
 LOGIN_REDIRECT_URL = '/'  # It means home view
