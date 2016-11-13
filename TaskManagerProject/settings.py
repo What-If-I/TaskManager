@@ -12,6 +12,7 @@ https://docs.djangoproject.com/en/1.10/ref/settings/
 
 import os
 from django.utils.translation import ugettext_lazy
+import whitenoise
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -26,7 +27,7 @@ SECRET_KEY = 'KPDgUFSzmZxqKfgj11hRkbItgIKhZyZzC06u2Sf1&'
 # SECRET_KEY = os.environ['SECRET_KEY']
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = ['*']
 
@@ -56,7 +57,6 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
-STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
 # Channel settings
 CHANNEL_LAYERS = {
@@ -71,8 +71,8 @@ ROOT_URLCONF = 'TaskManagerProject.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [os.path.join(BASE_DIR, 'TaskManager/../templates'),
-                 os.path.join(BASE_DIR, 'task_manager/task_manager/templates')
+        'DIRS': [os.path.join(BASE_DIR, '/templates'),
+                 os.path.join(BASE_DIR, 'task_manager/templates')
                  ]
         ,
         'APP_DIRS': True,
@@ -149,10 +149,13 @@ LANGUAGES = [
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.10/howto/static-files/
 
-PROJECT_DIR = os.path.dirname(os.path.abspath(__file__))
-
 LOGIN_REDIRECT_URL = '/'  # It means home view
 
-STATIC_ROOT = os.path.join(PROJECT_DIR, 'static')
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+PROJECT_DIR = os.path.dirname(os.path.abspath(__file__))
+STATIC_ROOT = os.path.join(PROJECT_DIR, 'static/')
 STATIC_URL = '/static/'
+
+print(PROJECT_DIR)
+print(STATIC_ROOT)
 
