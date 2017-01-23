@@ -1,4 +1,5 @@
 from django.urls.base import reverse
+from django.shortcuts import render
 from django.views import generic
 from .models import Task, TaskForm
 from django.contrib.auth.mixins import LoginRequiredMixin
@@ -31,7 +32,7 @@ class IndexView(LoginRequiredMixin, generic.ListView):
             return redirect(reverse('task_manager:index'))
 
         else:
-            return self.render_to_response(
+            return render(self.request, 'task_manager/index.html',
                           context={
                               'tasks_by_days': self.get_queryset(),
                               'open_task_form': True,
@@ -80,7 +81,7 @@ class DailyTaskView(LoginRequiredMixin, generic.DayArchiveView):
             return redirect(self.request.path)
 
         else:
-            return self.render_to_response(
+            return render(self.request, 'task_manager/by_day.html',
                           context={
                               'tasks_by_days': self.get_queryset(),
                               'open_task_form': True,

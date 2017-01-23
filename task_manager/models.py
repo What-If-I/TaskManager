@@ -1,5 +1,6 @@
 import datetime
 
+import django.utils.timezone
 from collections import defaultdict
 from django.contrib.auth.models import User
 from django.db import models
@@ -11,7 +12,7 @@ from django import forms
 class Task(models.Model):
     owner = models.ForeignKey(User, on_delete=models.CASCADE, verbose_name='Owner')
     title = models.CharField(max_length=100, verbose_name='Task')
-    due_to_date = models.DateField(default=datetime.date.today(), verbose_name='Due to')
+    due_to_date = models.DateField(default=django.utils.timezone.now(), verbose_name='Due to')
     description = models.TextField('Description')
     reminder = models.DateTimeField('Reminder', blank=True, null=True)
     attached_file = models.FileField(upload_to='uploads/', blank=True, null=True, verbose_name='Document')
