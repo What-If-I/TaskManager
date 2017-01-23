@@ -151,11 +151,7 @@ LANGUAGES = [
 
 LOGIN_REDIRECT_URL = '/'  # It means home view
 
-STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+# STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 PROJECT_DIR = os.path.dirname(os.path.abspath(__file__))
 STATIC_ROOT = os.path.join(PROJECT_DIR, 'static/')
 STATIC_URL = '/static/'
-
-print("Project dir:", PROJECT_DIR)
-print("Static root:", STATIC_ROOT)
-
