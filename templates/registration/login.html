@@ -25,8 +25,7 @@
 
 <input type="submit" value="Войти" />
 <input type="hidden" name="next" value="{{ next }}" />
+<a href="{% url 'register' %}"><button>Зарегестрироваться</button></a>
 </form>
-
-    <a href="{% url 'register' %}"><button>Зарегестрироваться</button></a>
 
 {% endblock %}

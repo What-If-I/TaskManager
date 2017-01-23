@@ -62,3 +62,28 @@ class DailyTaskView(LoginRequiredMixin, generic.DayArchiveView):
 
     def get_queryset(self, *args, **kwargs):
         return self.queryset.filter(owner=self.request.user.id)
+
+    def post(self, request, *args, **kwargs):
+        """Submit new task"""
+        reminder = self.request.POST['notificationTime']
+
+        task_form = TaskForm(
+            {
+                'title': self.request.POST['title'],
+                'description': self.request.POST['description'],
+                'due_to_date': self.request.POST['completeDate'],
+                'reminder': reminder.replace("T", " "),  # remove 'T' between date and time
+            }
+        )
+        if task_form.is_valid():
+            Task(owner=self.request.user, **task_form.cleaned_data).save()
+            return redirect(self.request.path)
+
+        else:
+            return self.render_to_response(
+                          context={
+                              'tasks_by_days': self.get_queryset(),
+                              'open_task_form': True,
+                              'task_form': task_form,
+                              'task_form_reminder': reminder,
+                          })

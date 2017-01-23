@@ -311,3 +311,6 @@
 .edition-form-container_visible {
   display: flex;
 }
+a {
+  text-decoration: none;
+}

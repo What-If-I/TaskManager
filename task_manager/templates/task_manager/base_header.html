@@ -10,9 +10,11 @@
 				<i class="fa fa-cog button__icon"></i>
 				{{ user.username|capfirst }}
 			</button>
-			<button class="button header__button">
-                <a href="/logout/"><i class="fa fa-sign-out"></i></a>
-			</button>
+			<a href="/logout/">
+                <button class="button header__button">
+                    <i class="fa fa-sign-out"></i>
+                </button>
+            </a>
 		</div>
 	</header>
 {% endblock %}
